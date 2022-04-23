@@ -9,3 +9,12 @@ exports.create = (req, res)=>{
         res.end("Student is created");
     });
 }
+
+exports.search = (req, res)=>{
+    const input = req.body;
+    console.log(input);
+    repo.search(input, (content)=>{
+        console.log(content);
+        res.end(content);
+    });
+}

@@ -12,3 +12,20 @@ exports.createStudent = (student, cb)=>{
         }
     })
 }
+
+exports.search = (input, cb)=>{
+    console.log("NAN");
+    const latitude = Number(input.latitude);
+    const longitude = Number(input.longitude);
+    const distance = Number(input.distance);
+    const query = "select * from Student where (Latitude > "+(latitude-distance).toString()+" and Latitude <"+(latitude+distance).toString()+") and (Longitude > "+(longitude-distance).toString()+" and Longitude <"+(longitude+distance).toString()+")";
+    console.log(query);
+    db.query(query, (err, rows)=>{
+        console.log(rows);
+        if(rows){
+            cb(JSON.stringify(rows));
+        }else{
+            throw new Error(err);
+        }
+    })
+}
